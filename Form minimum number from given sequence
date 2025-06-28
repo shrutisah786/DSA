@@ -1,0 +1,35 @@
+//   Form minimum number from given sequence
+//   Auxiliary Given a pattern containing only I's and D's. I for increasing and D for decreasing. Device an algorithm to print the minimum number following that pattern. Digits from 1-9 and digits can’t repeat.
+//   Examples: 
+//   Input: D        Output: 21
+//   Input: I        Output: 12
+//   Input: DD       Output: 321
+//   Input: II       Output: 123
+//   Input: DIDI     Output: 21435
+//   Input: IIDDD    Output: 126543
+//   Input: DDIDDIID Output: 321654798
+//   Source: Amazon Interview Question
+
+// Stack-based approach:
+// 1️⃣ Hum ek counter rakhenge num = 1 se shuru.
+// 2️⃣ Pattern traverse karenge left to right.
+// 3️⃣ Har position par current number stack mein daal denge.
+// 4️⃣ Jaise hi I dikhe ya end of pattern aayega — tab stack ko pop karke print karenge.
+// 5️⃣ Isse kya hota hai — jitne bhi D aaye wo stack mein reverse ho jaate hain, aur I aate hi unko print kar diya jaata hai increasing order mein.
+
+class Solution {
+    static String printMinNumberForPattern(String S) {
+        int num = 1;
+        StringBuilder s = new StringBuilder();
+        Stack<Integer> stack = new Stack<>();
+        for(int i=0; i<=S.length(); i++){
+            stack.push(num++);
+            if(i==S.length() || S.charAt(i)=='I'){
+                while(!stack.isEmpty()){
+                    s.append(String.valueOf(stack.pop()));
+                }
+            }
+        }
+        return s.toString();
+    }
+}
